@@ -1,0 +1,143 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#08080d">
+  <title>Literally Me</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- Background video -->
+  <video id="bg-video" autoplay loop playsinline>
+    <source src="assets/ryan-edit.mp4" type="video/mp4">
+  </video>
+
+  <!-- Cinematic overlays -->
+  <div class="bg-overlay"></div>
+  <div class="film-grain"></div>
+  <div id="sparkle-layer" aria-hidden="true"></div>
+
+  <!-- Left-side CD selectors -->
+  <nav class="cd-collection" aria-label="Background videos">
+
+    <button class="cd-item active" type="button"
+      data-video="assets/i-can-fix-that.mp4">
+      <span class="cd-disc">
+        <img src="assets/i-can-fix-that.jpg" alt="">
+        <span class="cd-hole"></span>
+      </span>
+      <span class="cd-label">I CAN FIX THAT</span>
+    </button>
+
+    <button class="cd-item" type="button"
+      data-video="assets/literally-me.mp4">
+      <span class="cd-disc">
+        <img src="assets/literally-thumbnail.jpg" alt="">
+        <span class="cd-hole"></span>
+      </span>
+      <span class="cd-label">LITERALLY ME</span>
+    </button>
+
+    <button class="cd-item" type="button"
+      data-video="assets/alone.mp4">
+      <span class="cd-disc">
+        <img src="assets/alone-thumbnail.jpg" alt="">
+        <span class="cd-hole"></span>
+      </span>
+      <span class="cd-label">ALONE</span>
+    </button>
+
+  </nav>
+
+  <!-- Main profile -->
+  <main class="website">
+    <section class="profile">
+
+      <div class="avatar-ring">
+        <img
+          class="profile-avatar"
+          src="assets/profile.jpg"
+          alt="Profile photo"
+        >
+      </div>
+
+      <h1 class="profile-title" data-text="Prince">Prince</h1>
+
+      <p class="quote">
+        "Somewhere between reality and a dream."
+      </p>
+
+      <p class="location">
+        <span class="location-dot"></span>
+        SOMEWHERE IN THE NIGHT
+      </p>
+
+      <!-- Social icons -->
+      <nav class="socials" aria-label="Social links">
+
+        <a href="https://www.instagram.com/aep.prince/"
+          target="_blank" rel="noopener noreferrer"
+          aria-label="Instagram">
+          <img src="assets/instagram.png" alt="Instagram">
+        </a>
+
+        <a href="https://t.me/freeaepf"
+          target="_blank" rel="noopener noreferrer"
+          aria-label="Telegram">
+          <img src="assets/telegram.png" alt="Telegram">
+        </a>
+
+        <a href="https://discord.gg/sajbuPwMwM"
+          target="_blank" rel="noopener noreferrer"
+          aria-label="Discord">
+          <img src="assets/discord.png" alt="Discord">
+        </a>
+
+        <a href="https://www.youtube.com/@Aep.prince"
+          target="_blank" rel="noopener noreferrer"
+          aria-label="YouTube">
+          <img src="assets/youtube.png" alt="YouTube">
+        </a>
+
+      </nav>
+
+    </section>
+  </main>
+
+  <!-- Bottom road and car animation -->
+  <div class="road-scene" aria-hidden="true">
+    <div class="road-horizon"></div>
+    <div class="road-line"></div>
+
+    <div class="drive-car">
+      <div class="car-roof"></div>
+      <div class="car-window"></div>
+      <div class="car-body"></div>
+      <div class="car-wheel wheel-left"></div>
+      <div class="car-wheel wheel-right"></div>
+      <div class="car-light"></div>
+      <div class="car-headlight"></div>
+    </div>
+  </div>
+
+  <!-- Visitor counter: separate from social icons -->
+  <div id="visitor-counter" class="visitor-counter"
+       aria-label="Website visitor statistics">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z"></path>
+      <circle cx="12" cy="12" r="3"></circle>
+    </svg>
+    <span id="total-views">—</span>
+    <span>views</span>
+    <span class="counter-divider">·</span>
+    <span id="unique-visitors">—</span>
+    <span>visitors</span>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

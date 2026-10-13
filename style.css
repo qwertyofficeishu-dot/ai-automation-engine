@@ -1,0 +1,3842 @@
+
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Rajdhani:wght@400;500;600;700&display=swap');
+
+
+
+:root {
+
+    --pink: #ff8fd8;
+
+    --purple: #b69aff;
+
+    --cyan: #79e8ff;
+
+    --white: #faf7ff;
+
+}
+
+
+
+* {
+
+    box-sizing: border-box;
+
+    margin: 0;
+
+    padding: 0;
+
+}
+
+
+
+html {
+
+    min-height: 100%;
+
+    scroll-behavior: smooth;
+
+}
+
+
+
+body {
+
+    min-height: 100vh;
+
+    overflow-x: hidden;
+
+    background: #08080d;
+
+    color: var(--white);
+
+    font-family: 'Inter', sans-serif;
+
+}
+
+
+
+/* Background video */
+
+#bg-video {
+
+    position: fixed;
+
+    inset: 0;
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+
+    opacity: .70;
+
+    z-index: -3;
+
+    background: #08080d;
+
+}
+
+
+
+.bg-overlay {
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: -2;
+
+    pointer-events: none;
+
+    background:
+
+        linear-gradient(90deg,
+
+            rgba(8,5,15,.52),
+
+            rgba(12,7,22,.12) 50%,
+
+            rgba(8,5,15,.42)),
+
+        linear-gradient(0deg,
+
+            rgba(5,4,10,.72),
+
+            transparent 65%);
+
+}
+
+
+
+.film-grain {
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 18;
+
+    pointer-events: none;
+
+    opacity: .06;
+
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http\://www\.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+
+}
+
+
+
+/* =================================
+
+   CD SECTION — NO GLASS PANEL
+
+\================================= */
+
+
+
+.cd-collection {
+
+    position: fixed;
+
+    left: 24px;
+
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    z-index: 12;
+
+
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 13px;
+
+
+
+    padding: 0;
+
+    background: transparent;
+
+    border: none;
+
+    border-radius: 0;
+
+    box-shadow: none;
+
+    backdrop-filter: none;
+
+    -webkit-backdrop-filter: none;
+
+
+
+    animation: cdEnter .8s ease both;
+
+}
+
+
+
+.cd-item {
+
+    width: 91px;
+
+    min-height: 91px;
+
+    padding: 4px 2px;
+
+
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 6px;
+
+
+
+    background: transparent;
+
+    border: 1px solid transparent;
+
+    border-radius: 12px;
+
+    color: white;
+
+    font: inherit;
+
+    cursor: pointer;
+
+
+
+    transition:
+
+        transform .3s ease,
+
+        background .3s ease,
+
+        border-color .3s ease;
+
+}
+
+
+
+.cd-item:hover {
+
+    transform: translateX(4px);
+
+    background: rgba(255,255,255,.035);
+
+}
+
+
+
+.cd-disc {
+
+    position: relative;
+
+    display: block;
+
+    width: 65px;
+
+    height: 65px;
+
+    flex-shrink: 0;
+
+    overflow: hidden;
+
+
+
+    border-radius: 50%;
+
+    border: 1px solid rgba(255,255,255,.32);
+
+    background: #15121c;
+
+    box-shadow: 0 5px 15px rgba(0,0,0,.30);
+
+
+
+    transition:
+
+        border-color .3s ease,
+
+        box-shadow .3s ease;
+
+}
+
+
+
+.cd-disc img {
+
+    width: 100%;
+
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+
+    border-radius: 50%;
+
+    filter: brightness(.9) saturate(.9);
+
+}
+
+
+
+.cd-hole {
+
+    position: absolute;
+
+    top: 50%;
+
+    left: 50%;
+
+    z-index: 2;
+
+
+
+    width: 12px;
+
+    height: 12px;
+
+    transform: translate(-50%,-50%);
+
+
+
+    border-radius: 50%;
+
+    border: 2px solid rgba(255,255,255,.72);
+
+    background: #15121c;
+
+    box-shadow: 0 0 0 3px rgba(255,255,255,.12);
+
+}
+
+
+
+.cd-label {
+
+    display: block;
+
+    max-width: 100%;
+
+    font-size: 9px;
+
+    font-weight: 500;
+
+    text-align: center;
+
+    line-height: 1.3;
+
+    color: rgba(255,255,255,.78);
+
+}
+
+
+
+.cd-item.active .cd-disc {
+
+    border-color: var(--pink);
+
+    box-shadow: 0 0 17px rgba(255,143,216,.26);
+
+}
+
+
+
+.cd-item.active .cd-disc img {
+
+    animation: discSpin 12s linear infinite;
+
+}
+
+
+
+.cd-item.active .cd-label {
+
+    color: #ffd7f0;
+
+}
+
+
+
+/* =================================
+
+   MAIN LAYOUT
+
+\================================= */
+
+
+
+.website {
+
+    position: relative;
+
+    z-index: 2;
+
+
+
+    min-height: 100vh;
+
+    width: 100%;
+
+
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 15px;
+
+
+
+    padding: 45px 100px 100px 145px;
+
+}
+
+
+
+/* =================================
+
+   PROFILE
+
+\================================= */
+
+
+
+.profile {
+
+    width: 100%;
+
+    max-width: 580px;
+
+
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    text-align: center;
+
+
+
+    animation: fadeUp .9s ease both;
+
+}
+
+
+
+.avatar-ring {
+
+    width: 118px;
+
+    height: 118px;
+
+    padding: 4px;
+
+
+
+    border: 1px solid rgba(255,255,255,.38);
+
+    border-radius: 50%;
+
+
+
+    background: rgba(255,255,255,.08);
+
+    box-shadow:
+
+        0 0 0 5px rgba(255,255,255,.025),
+
+        0 0 26px rgba(255,143,216,.16),
+
+        0 0 55px rgba(121,232,255,.06);
+
+
+
+    animation: avatarFloat 5s ease-in-out infinite;
+
+}
+
+
+
+.profile-avatar {
+
+    display: block;
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+
+    border-radius: 50%;
+
+}
+
+
+
+.profile-title {
+
+    margin-top: 18px;
+
+
+
+    font-family: 'Rajdhani', 'Arial Narrow', sans-serif;
+
+    font-size: clamp(43px, 5vw, 66px);
+
+    font-weight: 600;
+
+    line-height: 1;
+
+    letter-spacing: .045em;
+
+    color: #f7f2fa;
+
+
+
+    text-shadow:
+
+        0 0 15px rgba(255,255,255,.14),
+
+        0 0 30px rgba(255,143,216,.15);
+
+
+
+    animation: titleGlow 4s ease-in-out infinite;
+
+}
+
+
+
+.quote {
+
+    margin-top: 10px;
+
+    font-size: 12px;
+
+    line-height: 1.7;
+
+    font-weight: 300;
+
+    letter-spacing: .035em;
+
+    color: rgba(255,255,255,.82);
+
+}
+
+
+
+.location {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 7px;
+
+    margin-top: 8px;
+
+
+
+    font-size: 9px;
+
+    font-weight: 600;
+
+    letter-spacing: .11em;
+
+    color: rgba(255,255,255,.68);
+
+    text-transform: uppercase;
+
+}
+
+
+
+.location-dot {
+
+    width: 6px;
+
+    height: 6px;
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+
+    background: var(--pink);
+
+    box-shadow: 0 0 10px var(--pink);
+
+    animation: dotPulse 2s ease-in-out infinite;
+
+}
+
+
+
+/* =================================
+
+   GLASS SOCIAL BUTTONS
+
+\================================= */
+
+
+
+.socials {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    flex-wrap: wrap;
+
+    gap: 8px;
+
+
+
+    animation: fadeUp .9s .15s ease both;
+
+}
+
+
+
+.socials a {
+
+    position: relative;
+
+    width: 36px;
+
+    height: 35px;
+
+
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+
+
+    border: 1px solid rgba(255,255,255,.24);
+
+    border-radius: 11px;
+
+
+
+    background: rgba(255,255,255,.075);
+
+    -webkit-backdrop-filter: blur(16px) saturate(150%);
+
+    backdrop-filter: blur(16px) saturate(150%);
+
+
+
+    box-shadow:
+
+        inset 0 1px 0 rgba(255,255,255,.16),
+
+        0 5px 15px rgba(0,0,0,.14);
+
+
+
+    color: white;
+
+    text-decoration: none;
+
+    font-size: 10px;
+
+    font-weight: 600;
+
+
+
+    transition:
+
+        transform .25s ease,
+
+        background .25s ease,
+
+        border-color .25s ease,
+
+        box-shadow .25s ease;
+
+}
+
+
+
+.socials a:hover {
+
+    transform: translateY(-3px);
+
+    background: rgba(255,255,255,.15);
+
+    border-color: rgba(255,143,216,.48);
+
+    box-shadow: 0 0 17px rgba(255,143,216,.12);
+
+}
+
+
+
+/* =================================
+
+   LIQUID GLASS MUSIC PLAYER
+
+\================================= */
+
+
+
+.music-player {
+
+    position: relative;
+
+    isolation: isolate;
+
+    overflow: hidden;
+
+
+
+    width: min(100%, 385px);
+
+    min-height: 89px;
+
+    padding: 11px 13px;
+
+
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 11px;
+
+
+
+    border: 1px solid rgba(255,255,255,.30);
+
+    border-radius: 17px;
+
+
+
+    background: linear-gradient(
+
+        135deg,
+
+        rgba(255,255,255,.17),
+
+        rgba(255,255,255,.045) 50%,
+
+        rgba(187,164,255,.07)
+
+    );
+
+
+
+    -webkit-backdrop-filter: blur(24px) saturate(165%);
+
+    backdrop-filter: blur(24px) saturate(165%);
+
+
+
+    box-shadow:
+
+        inset 0 1px 0 rgba(255,255,255,.30),
+
+        inset 0 -1px 0 rgba(255,255,255,.06),
+
+        0 12px 35px rgba(0,0,0,.20);
+
+
+
+    animation: fadeUp .9s .25s ease both;
+
+
+
+    transition:
+
+        border-color .3s ease,
+
+        box-shadow .3s ease;
+
+}
+
+
+
+.music-player::before {
+
+    content: "";
+
+    position: absolute;
+
+    top: -80%;
+
+    left: -65%;
+
+    width: 40%;
+
+    height: 260%;
+
+    z-index: -1;
+
+    pointer-events: none;
+
+
+
+    transform: rotate(25deg);
+
+    background: linear-gradient(
+
+        90deg,
+
+        transparent,
+
+        rgba(255,255,255,.13),
+
+        transparent
+
+    );
+
+
+
+    animation: glassShine 8s ease-in-out infinite;
+
+}
+
+
+
+.music-player:hover {
+
+    border-color: rgba(255,255,255,.43);
+
+    box-shadow:
+
+        inset 0 1px 0 rgba(255,255,255,.34),
+
+        0 16px 38px rgba(0,0,0,.23),
+
+        0 0 22px rgba(187,164,255,.08);
+
+}
+
+
+
+.track-art {
+
+    width: 49px;
+
+    height: 49px;
+
+    padding: 3px;
+
+    flex-shrink: 0;
+
+    overflow: hidden;
+
+
+
+    border: 1px solid rgba(255,255,255,.30);
+
+    border-radius: 11px;
+
+    background: rgba(255,255,255,.12);
+
+}
+
+
+
+.track-art img {
+
+    display: block;
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+
+    border-radius: 8px;
+
+}
+
+
+
+.track-info {
+
+    flex: 1;
+
+    min-width: 0;
+
+}
+
+
+
+.track-info h3 {
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
+
+    font-size: 11px;
+
+    font-weight: 600;
+
+    color: white;
+
+}
+
+
+
+.track-info p {
+
+    margin-top: 4px;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
+
+    font-size: 9px;
+
+    color: rgba(255,255,255,.70);
+
+}
+
+
+
+.progress {
+
+    display: block;
+
+    width: 100%;
+
+    height: 4px;
+
+    margin-top: 10px;
+
+
+
+    appearance: none;
+
+    -webkit-appearance: none;
+
+
+
+    background: rgba(255,255,255,.25);
+
+    border-radius: 10px;
+
+    outline: none;
+
+    cursor: pointer;
+
+}
+
+
+
+.progress::-webkit-slider-thumb {
+
+    appearance: none;
+
+    -webkit-appearance: none;
+
+    width: 9px;
+
+    height: 9px;
+
+    border-radius: 50%;
+
+    background: var(--pink);
+
+    border: 1px solid white;
+
+    box-shadow: 0 0 8px rgba(255,143,216,.6);
+
+}
+
+
+
+.progress::-moz-range-thumb {
+
+    width: 9px;
+
+    height: 9px;
+
+    border-radius: 50%;
+
+    background: var(--pink);
+
+    border: 1px solid white;
+
+}
+
+
+
+.time {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    margin-top: 5px;
+
+    font-size: 9px;
+
+    font-variant-numeric: tabular-nums;
+
+    color: rgba(255,255,255,.62);
+
+}
+
+
+
+.player-controls {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 4px;
+
+    flex-shrink: 0;
+
+}
+
+
+
+.player-controls button {
+
+    width: 25px;
+
+    height: 25px;
+
+
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+
+
+    border: 1px solid rgba(255,255,255,.24);
+
+    border-radius: 50%;
+
+    background: rgba(255,255,255,.08);
+
+
+
+    color: white;
+
+    font-size: 9px;
+
+    cursor: pointer;
+
+
+
+    transition:
+
+        transform .2s ease,
+
+        background .2s ease;
+
+}
+
+
+
+.player-controls button:hover {
+
+    transform: scale(1.08);
+
+    background: rgba(255,255,255,.18);
+
+}
+
+
+
+.player-controls .play-button {
+
+    width: 31px;
+
+    height: 31px;
+
+    border-color: rgba(255,143,216,.52);
+
+    background: rgba(255,143,216,.18);
+
+}
+
+
+
+.player-controls .play-button:hover {
+
+    background: rgba(255,143,216,.30);
+
+}
+
+
+
+#audio {
+
+    display: none;
+
+}
+
+
+
+/* =================================
+
+   NIGHT DRIVE CAR
+
+\================================= */
+
+
+
+.road-scene {
+
+    position: fixed;
+
+    left: 0;
+
+    bottom: 0;
+
+    width: 100%;
+
+    height: 92px;
+
+    overflow: hidden;
+
+    pointer-events: none;
+
+    z-index: 1;
+
+
+
+    background: linear-gradient(
+
+        0deg,
+
+        rgba(5,4,9,.72),
+
+        rgba(5,4,9,.17) 60%,
+
+        transparent
+
+    );
+
+}
+
+
+
+.road-horizon {
+
+    position: absolute;
+
+    bottom: 24px;
+
+    left: 0;
+
+    width: 100%;
+
+    height: 1px;
+
+
+
+    background: linear-gradient(
+
+        90deg,
+
+        transparent,
+
+        rgba(255,143,216,.5),
+
+        rgba(121,232,255,.3),
+
+        transparent
+
+    );
+
+}
+
+
+
+.road-line {
+
+    position: absolute;
+
+    bottom: 16px;
+
+    left: 0;
+
+    width: 100%;
+
+    height: 2px;
+
+
+
+    background: repeating-linear-gradient(
+
+        90deg,
+
+        rgba(255,255,255,.43) 0 38px,
+
+        transparent 38px 77px
+
+    );
+
+
+
+    animation: roadMove 1.3s linear infinite;
+
+}
+
+
+
+.drive-car {
+
+    position: absolute;
+
+    left: -180px;
+
+    bottom: 24px;
+
+    width: 126px;
+
+    height: 42px;
+
+
+
+    animation: driveAcross 12s linear infinite;
+
+}
+
+
+
+.car-roof {
+
+    position: absolute;
+
+    top: 0;
+
+    left: 31px;
+
+    width: 60px;
+
+    height: 23px;
+
+
+
+    border: 1px solid rgba(255,255,255,.28);
+
+    border-radius: 25px 25px 3px 3px;
+
+
+
+    background: linear-gradient(
+
+        135deg,
+
+        rgba(255,143,216,.78),
+
+        rgba(110,72,145,.8)
+
+    );
+
+}
+
+
+
+.car-window {
+
+    position: absolute;
+
+    top: 5px;
+
+    left: 40px;
+
+    width: 43px;
+
+    height: 14px;
+
+
+
+    border: 1px solid rgba(255,255,255,.24);
+
+    border-radius: 15px 15px 2px 2px;
+
+
+
+    background: linear-gradient(
+
+        135deg,
+
+        rgba(121,232,255,.65),
+
+        rgba(40,37,68,.9)
+
+    );
+
+}
+
+
+
+.car-body {
+
+    position: absolute;
+
+    left: 5px;
+
+    bottom: 7px;
+
+    width: 115px;
+
+    height: 22px;
+
+
+
+    border: 1px solid rgba(255,255,255,.28);
+
+    border-radius: 12px 21px 5px 5px;
+
+
+
+    background: linear-gradient(
+
+        180deg,
+
+        rgba(255,143,216,.95),
+
+        rgba(105,54,116,.95)
+
+    );
+
+
+
+    box-shadow:
+
+        0 0 14px rgba(255,143,216,.22),
+
+        inset 0 1px 0 rgba(255,255,255,.4);
+
+}
+
+
+
+.car-wheel {
+
+    position: absolute;
+
+    bottom: 0;
+
+    width: 16px;
+
+    height: 16px;
+
+
+
+    border: 3px solid #d5cde7;
+
+    border-radius: 50%;
+
+    background: #111019;
+
+    box-shadow: inset 0 0 0 2px #302b3a;
+
+}
+
+
+
+.wheel-left { left: 23px; }
+
+.wheel-right { right: 17px; }
+
+
+
+.car-light {
+
+    position: absolute;
+
+    left: 1px;
+
+    bottom: 14px;
+
+    width: 10px;
+
+    height: 7px;
+
+    border-radius: 3px;
+
+    background: #ff6f9f;
+
+    box-shadow: 0 0 13px rgba(255,70,130,.7);
+
+}
+
+
+
+.car-headlight {
+
+    position: absolute;
+
+    right: 0;
+
+    bottom: 14px;
+
+    width: 7px;
+
+    height: 7px;
+
+    border-radius: 2px;
+
+    background: #fff2c5;
+
+    box-shadow: 0 0 14px rgba(255,242,197,.8);
+
+}
+
+
+
+/* =================================
+
+   SPARKLES & AMBIENT PARTICLES
+
+\================================= */
+
+
+
+#sparkle-layer {
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 30;
+
+    overflow: hidden;
+
+    pointer-events: none;
+
+}
+
+
+
+.sparkle {
+
+    position: absolute;
+
+    display: block;
+
+    border-radius: 50%;
+
+    pointer-events: none;
+
+    will-change: transform, opacity;
+
+
+
+    background: radial-gradient(
+
+        circle,
+
+        #fff 0%,
+
+        var(--spark-color, #ff8fd8) 27%,
+
+        transparent 75%
+
+    );
+
+
+
+    box-shadow:
+
+        0 0 7px var(--spark-color, #ff8fd8),
+
+        0 0 15px var(--spark-color, #ff8fd8);
+
+
+
+    animation: sparkleFade var(--life, 850ms) ease-out forwards;
+
+}
+
+
+
+.sparkle::after {
+
+    content: "";
+
+    position: absolute;
+
+    left: 50%;
+
+    top: 50%;
+
+    width: 1px;
+
+    height: 190%;
+
+    transform: translate(-50%,-50%);
+
+    border-radius: 3px;
+
+    background: rgba(255,255,255,.8);
+
+}
+
+
+
+.ambient-particle {
+
+    position: absolute;
+
+    display: block;
+
+    border-radius: 50%;
+
+    pointer-events: none;
+
+    will-change: transform, opacity;
+
+
+
+    background: var(--particle-color, #b69aff);
+
+
+
+    box-shadow:
+
+        0 0 7px var(--particle-color, #b69aff),
+
+        0 0 16px var(--particle-color, #b69aff);
+
+
+
+    animation: ambientFloat var(--float-duration, 8s) ease-in-out infinite;
+
+    animation-delay: var(--float-delay, 0s);
+
+}
+
+
+
+/* =================================
+
+   ANIMATIONS
+
+\================================= */
+
+
+
+@keyframes discSpin {
+
+    from { transform: rotate(0deg); }
+
+    to { transform: rotate(360deg); }
+
+}
+
+
+
+@keyframes avatarFloat {
+
+    0%, 100% { transform: translateY(0); }
+
+    50% { transform: translateY(-6px); }
+
+}
+
+
+
+@keyframes titleGlow {
+
+    0%, 100% {
+
+        text-shadow:
+
+            0 0 12px rgba(255,255,255,.12),
+
+            0 0 25px rgba(255,143,216,.13);
+
+    }
+
+    50% {
+
+        text-shadow:
+
+            0 0 18px rgba(255,255,255,.23),
+
+            0 0 37px rgba(255,143,216,.24);
+
+    }
+
+}
+
+
+
+@keyframes dotPulse {
+
+    0%, 100% { opacity: 1; }
+
+    50% { opacity: .45; }
+
+}
+
+
+
+@keyframes fadeUp {
+
+    from {
+
+        opacity: 0;
+
+        transform: translateY(13px);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform: translateY(0);
+
+    }
+
+}
+
+
+
+@keyframes cdEnter {
+
+    from {
+
+        opacity: 0;
+
+        transform: translate(-10px,-50%);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform: translate(0,-50%);
+
+    }
+
+}
+
+
+
+@keyframes glassShine {
+
+    0%, 20% { left: -65%; }
+
+    65%, 100% { left: 140%; }
+
+}
+
+
+
+@keyframes driveAcross {
+
+    from { left: -180px; }
+
+    to { left: calc(100% + 180px); }
+
+}
+
+
+
+@keyframes roadMove {
+
+    from { background-position: 0 0; }
+
+    to { background-position: -77px 0; }
+
+}
+
+
+
+@keyframes sparkleFade {
+
+    0% {
+
+        opacity: 0;
+
+        transform: translate(-50%,-50%) scale(.2) rotate(0deg);
+
+    }
+
+    15% { opacity: 1; }
+
+    100% {
+
+        opacity: 0;
+
+        transform: translate(
+
+            calc(-50% + var(--drift-x, 8px)),
+
+            calc(-50% + var(--drift-y, -18px))
+
+        ) scale(0) rotate(100deg);
+
+    }
+
+}
+
+
+
+@keyframes ambientFloat {
+
+    0%, 100% {
+
+        opacity: .12;
+
+        transform: translate3d(0,0,0) scale(.8);
+
+    }
+
+    50% {
+
+        opacity: .68;
+
+        transform: translate3d(
+
+            var(--float-x, 12px),
+
+            var(--float-y, -22px),
+
+            0
+
+        ) scale(1.25);
+
+    }
+
+}
+
+
+
+/* =================================
+
+   TABLET
+
+\================================= */
+
+
+
+@media (max-width: 1050px) {
+
+    .cd-collection {
+
+        left: 9px;
+
+        gap: 9px;
+
+    }
+
+
+
+    .cd-item {
+
+        width: 82px;
+
+        min-height: 83px;
+
+    }
+
+
+
+    .cd-disc {
+
+        width: 57px;
+
+        height: 57px;
+
+    }
+
+
+
+    .cd-label { font-size: 8px; }
+
+
+
+    .website {
+
+        padding-left: 110px;
+
+        padding-right: 25px;
+
+    }
+
+}
+
+
+
+/* =================================
+
+   MOBILE
+
+\================================= */
+
+
+
+@media (max-width: 700px) {
+
+    .website {
+
+        min-height: 100svh;
+
+        padding: 55px 14px 180px;
+
+        gap: 13px;
+
+    }
+
+
+
+    .cd-collection {
+
+        top: auto;
+
+        bottom: 87px;
+
+        left: 50%;
+
+        transform: translateX(-50%);
+
+
+
+        width: max-content;
+
+        max-width: calc(100vw - 18px);
+
+
+
+        flex-direction: row;
+
+        justify-content: center;
+
+        gap: 4px;
+
+    }
+
+
+
+    .cd-item {
+
+        width: 82px;
+
+        min-height: 79px;
+
+        padding: 4px 2px;
+
+        gap: 5px;
+
+    }
+
+
+
+    .cd-disc {
+
+        width: 49px;
+
+        height: 49px;
+
+    }
+
+
+
+    .cd-hole {
+
+        width: 10px;
+
+        height: 10px;
+
+    }
+
+
+
+    .cd-label { font-size: 8px; }
+
+
+
+    .avatar-ring {
+
+        width: 100px;
+
+        height: 100px;
+
+    }
+
+
+
+    .profile-title {
+
+        margin-top: 15px;
+
+        font-size: clamp(37px, 10vw, 49px);
+
+    }
+
+
+
+    .quote {
+
+        font-size: 11px;
+
+        margin-top: 8px;
+
+    }
+
+
+
+    .location {
+
+        font-size: 8px;
+
+        margin-top: 7px;
+
+    }
+
+
+
+    .socials { gap: 7px; }
+
+
+
+    .socials a {
+
+        width: 33px;
+
+        height: 33px;
+
+        font-size: 9px;
+
+    }
+
+
+
+    .music-player {
+
+        width: min(100%, 350px);
+
+        min-height: 79px;
+
+        padding: 9px;
+
+        gap: 8px;
+
+    }
+
+
+
+    .track-art {
+
+        width: 42px;
+
+        height: 42px;
+
+    }
+
+
+
+    .track-info h3 { font-size: 10px; }
+
+    .track-info p { font-size: 8px; }
+
+
+
+    .player-controls { gap: 3px; }
+
+
+
+    .player-controls button {
+
+        width: 22px;
+
+        height: 22px;
+
+        font-size: 8px;
+
+    }
+
+
+
+    .player-controls .play-button {
+
+        width: 28px;
+
+        height: 28px;
+
+    }
+
+
+
+    .road-scene { height: 74px; }
+
+}
+
+
+
+/* Short desktop screens */
+
+
+
+@media (max-height: 700px) and (min-width: 701px) {
+
+    .website {
+
+        padding-top: 25px;
+
+        padding-bottom: 90px;
+
+        gap: 10px;
+
+    }
+
+
+
+    .avatar-ring {
+
+        width: 95px;
+
+        height: 95px;
+
+    }
+
+
+
+    .profile-title {
+
+        margin-top: 12px;
+
+        font-size: 43px;
+
+    }
+
+
+
+    .quote { margin-top: 6px; }
+
+    .location { margin-top: 6px; }
+
+
+
+    .music-player {
+
+        min-height: 78px;
+
+        padding: 8px 11px;
+
+    }
+
+}
+
+
+
+/* Accessibility */
+
+
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+
+    *::before,
+
+    *::after {
+
+        animation-duration: .01ms !important;
+
+        animation-iteration-count: 1 !important;
+
+        transition-duration: .01ms !important;
+
+    }
+
+}
+
+
+
+/* ===== MINIMAL GLOWING CURSOR TRAIL ===== */
+
+
+
+#sparkle-layer {
+
+    position: fixed;
+
+    inset: 0;
+
+    overflow: hidden;
+
+    pointer-events: none;
+
+    z-index: 30;
+
+}
+
+
+
+/* Remove old ambient particles */
+
+#sparkle-layer .ambient-particle {
+
+    display: none !important;
+
+}
+
+
+
+.mouse-spark {
+
+    position: absolute;
+
+    display: block;
+
+    border-radius: 50%;
+
+    pointer-events: none;
+
+
+
+    background: var(--spark-color);
+
+    box-shadow:
+
+        0 0 4px var(--spark-color),
+
+        0 0 8px var(--spark-color);
+
+
+
+    opacity: 0;
+
+    will-change: transform, opacity;
+
+
+
+    animation: mouseGravity var(--life) ease-out forwards;
+
+}
+
+
+
+@keyframes mouseGravity {
+
+    0% {
+
+        opacity: 0;
+
+        transform: translate(-50%, -50%) scale(.4);
+
+    }
+
+
+
+    12% {
+
+        opacity: .85;
+
+        transform: translate(-50%, -50%) scale(1);
+
+    }
+
+
+
+    100% {
+
+        opacity: 0;
+
+        transform: translate(
+
+            calc(-50% + var(--fall-x)),
+
+            calc(-50% + var(--fall-y))
+
+        ) scale(.15);
+
+    }
+
+}
+
+
+
+/* ===== SMALLER A REAL HERO PLAYER ===== */
+
+
+
+.music-player {
+
+    width: min(100%, 320px) !important;
+
+    min-height: 70px !important;
+
+    padding: 8px 10px !important;
+
+    gap: 8px !important;
+
+    border-radius: 14px !important;
+
+}
+
+
+
+.track-art {
+
+    width: 38px !important;
+
+    height: 38px !important;
+
+    padding: 2px !important;
+
+    border-radius: 8px !important;
+
+}
+
+
+
+.track-art img {
+
+    border-radius: 6px !important;
+
+}
+
+
+
+.track-info h3 {
+
+    font-size: 10px !important;
+
+}
+
+
+
+.track-info p {
+
+    font-size: 8px !important;
+
+    margin-top: 3px !important;
+
+}
+
+
+
+.track-info .progress {
+
+    height: 3px !important;
+
+    margin-top: 7px !important;
+
+}
+
+
+
+.time {
+
+    margin-top: 3px !important;
+
+    font-size: 8px !important;
+
+}
+
+
+
+.player-controls {
+
+    gap: 3px !important;
+
+}
+
+
+
+.player-controls button {
+
+    width: 21px !important;
+
+    height: 21px !important;
+
+    font-size: 8px !important;
+
+}
+
+
+
+.player-controls .play-button {
+
+    width: 27px !important;
+
+    height: 27px !important;
+
+}
+
+
+
+@media (max-width: 700px) {
+
+    .music-player {
+
+        width: min(100%, 300px) !important;
+
+        min-height: 66px !important;
+
+        padding: 7px !important;
+
+        gap: 7px !important;
+
+    }
+
+
+
+    .track-art {
+
+        width: 34px !important;
+
+        height: 34px !important;
+
+    }
+
+}
+
+
+
+/* Drive-inspired handwritten logo typography */
+
+
+
+.profile-title {
+
+    font-family: 'Italianno', cursive !important;
+
+    font-size: clamp(76px, 9vw, 112px) !important;
+
+    font-weight: 400 !important;
+
+    font-style: normal;
+
+    letter-spacing: -1px !important;
+
+    line-height: 0.9 !important;
+
+    text-transform: none;
+
+
+
+    color: #e9a5d4;
+
+
+
+    text-shadow:
+
+        0 0 8px rgba(235, 133, 202, 0.22),
+
+        0 0 22px rgba(210, 105, 195, 0.12);
+
+
+
+    transform: none !important;
+
+    animation: princeGlow 4s ease-in-out infinite;
+
+}
+
+
+
+@keyframes princeGlow {
+
+    0%, 100% {
+
+        text-shadow: 0 0 8px rgba(235,133,202,.18);
+
+    }
+
+    50% {
+
+        text-shadow:
+
+            0 0 12px rgba(235,133,202,.36),
+
+            0 0 25px rgba(210,105,195,.16);
+
+    }
+
+}
+
+
+
+@media (max-width: 700px) {
+
+    .profile-title {
+
+        font-size: 76px !important;
+
+    }
+
+}
+
+
+
+/* =========================================
+
+   CINEMATIC DARK-NIGHT ATMOSPHERE
+
+   Existing layout preserved
+
+\========================================= */
+
+
+
+/* Deep cinematic shadows without changing video colors */
+
+.bg-overlay {
+
+    background:
+
+        radial-gradient(
+
+            ellipse at 50% 44%,
+
+            rgba(12, 9, 23, .04) 0%,
+
+            rgba(7, 6, 14, .25) 55%,
+
+            rgba(3, 3, 8, .72) 100%
+
+        ),
+
+        linear-gradient(
+
+            0deg,
+
+            rgba(4, 4, 10, .76),
+
+            transparent 55%,
+
+            rgba(4, 4, 10, .22)
+
+        ) !important;
+
+}
+
+
+
+/* More cinematic film grain */
+
+.film-grain {
+
+    opacity: .085 !important;
+
+}
+
+
+
+/* Prince — elegant cinematic script */
+
+.profile-title {
+
+    font-family: 'Italianno', cursive !important;
+
+    font-size: clamp(82px, 9vw, 112px) !important;
+
+    font-weight: 400 !important;
+
+    letter-spacing: 0 !important;
+
+    line-height: .85 !important;
+
+    color: #e9afd9 !important;
+
+    transform: none !important;
+
+
+
+    text-shadow:
+
+        0 0 8px rgba(235, 165, 218, .23),
+
+        0 0 25px rgba(190, 143, 255, .12) !important;
+
+}
+
+
+
+/* Subtle atmospheric lighting around portrait */
+
+.avatar-ring {
+
+    position: relative;
+
+    border-color: rgba(233, 213, 255, .40) !important;
+
+
+
+    box-shadow:
+
+        0 0 0 1px rgba(255,255,255,.04),
+
+        0 0 24px rgba(190,143,255,.14),
+
+        0 0 55px rgba(255,143,216,.08) !important;
+
+}
+
+
+
+.avatar-ring::after {
+
+    content: "";
+
+    position: absolute;
+
+    inset: -9px;
+
+    border: 1px solid rgba(190, 143, 255, .16);
+
+    border-radius: 50%;
+
+    pointer-events: none;
+
+
+
+    animation: portraitAura 5s ease-in-out infinite;
+
+}
+
+
+
+/* Quote — understated movie-poster typography */
+
+.quote {
+
+    color: rgba(245, 239, 250, .76) !important;
+
+    font-weight: 300 !important;
+
+    letter-spacing: .055em !important;
+
+}
+
+
+
+/* Compact social buttons with darker glass */
+
+.socials a {
+
+    background: rgba(12, 10, 20, .40) !important;
+
+    border-color: rgba(255,255,255,.18) !important;
+
+
+
+    box-shadow:
+
+        inset 0 1px 0 rgba(255,255,255,.10),
+
+        0 7px 20px rgba(0,0,0,.22) !important;
+
+
+
+    -webkit-backdrop-filter: blur(15px) saturate(130%);
+
+    backdrop-filter: blur(15px) saturate(130%);
+
+}
+
+
+
+.socials a:hover {
+
+    border-color: rgba(233,175,217,.48) !important;
+
+    box-shadow: 0 0 19px rgba(190,143,255,.13) !important;
+
+}
+
+
+
+/* Music player — dark translucent glass */
+
+.music-player {
+
+    background: linear-gradient(
+
+        135deg,
+
+        rgba(22, 18, 32, .70),
+
+        rgba(10, 10, 18, .56) 60%,
+
+        rgba(30, 20, 39, .58)
+
+    ) !important;
+
+
+
+    border-color: rgba(230, 220, 255, .23) !important;
+
+
+
+    box-shadow:
+
+        inset 0 1px 0 rgba(255,255,255,.17),
+
+        inset 0 0 25px rgba(190,143,255,.025),
+
+        0 15px 38px rgba(0,0,0,.30) !important;
+
+}
+
+
+
+/* Keep CDs untouched by the glass effect */
+
+.cd-collection {
+
+    background: transparent !important;
+
+    border: none !important;
+
+    box-shadow: none !important;
+
+    backdrop-filter: none !important;
+
+    -webkit-backdrop-filter: none !important;
+
+}
+
+
+
+/* Slightly cinematic active CD glow */
+
+.cd-item.active .cd-disc {
+
+    border-color: rgba(233,175,217,.8) !important;
+
+    box-shadow:
+
+        0 0 12px rgba(233,175,217,.18),
+
+        0 0 25px rgba(190,143,255,.08) !important;
+
+}
+
+
+
+/* Mouse particles: tiny, soft, luminous */
+
+.mouse-spark {
+
+    filter: blur(.15px);
+
+    box-shadow:
+
+        0 0 4px var(--spark-color),
+
+        0 0 9px var(--spark-color) !important;
+
+}
+
+
+
+/* Ambient atmosphere only — no full-screen particle field */
+
+.ambient-particle {
+
+    opacity: .25;
+
+}
+
+
+
+/* Slow, subtle portrait aura */
+
+@keyframes portraitAura {
+
+    0%, 100% {
+
+        opacity: .35;
+
+        transform: scale(.99);
+
+    }
+
+    50% {
+
+        opacity: .8;
+
+        transform: scale(1.025);
+
+    }
+
+}
+
+
+
+/* Slightly reduce harsh motion */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .avatar-ring::after {
+
+        animation: none !important;
+
+    }
+
+}
+
+
+
+@media (max-width: 700px) {
+
+    .profile-title {
+
+        font-size: 78px !important;
+
+    }
+
+}
+
+
+
+/* ===== COMPACT CINEMATIC SOCIAL LINKS ===== */
+
+
+
+.socials {
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 7px;
+
+    margin-top: 2px;
+
+}
+
+
+
+.socials a {
+
+    width: 29px !important;
+
+    height: 29px !important;
+
+    border-radius: 50% !important;
+
+
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+
+
+    font-size: 9px !important;
+
+    font-weight: 500 !important;
+
+    letter-spacing: .02em;
+
+
+
+    color: rgba(255,255,255,.82) !important;
+
+    text-decoration: none;
+
+
+
+    background: rgba(15,12,23,.38) !important;
+
+    border: 1px solid rgba(255,255,255,.20) !important;
+
+
+
+    box-shadow:
+
+        inset 0 1px 0 rgba(255,255,255,.10),
+
+        0 4px 12px rgba(0,0,0,.20) !important;
+
+
+
+    backdrop-filter: blur(12px);
+
+    -webkit-backdrop-filter: blur(12px);
+
+
+
+    transition:
+
+        transform .25s ease,
+
+        border-color .25s ease,
+
+        box-shadow .25s ease,
+
+        background .25s ease;
+
+}
+
+
+
+.socials a:hover {
+
+    transform: translateY(-3px) scale(1.06);
+
+
+
+    color: #ffe0f4 !important;
+
+    background: rgba(190,143,255,.13) !important;
+
+    border-color: rgba(233,175,217,.55) !important;
+
+
+
+    box-shadow:
+
+        0 0 12px rgba(233,175,217,.13),
+
+        inset 0 1px 0 rgba(255,255,255,.15) !important;
+
+}
+
+
+
+/* Social logo image buttons */
+
+
+
+.socials a {
+
+    width: 32px !important;
+
+    height: 32px !important;
+
+    padding: 7px;
+
+    overflow: hidden;
+
+    border-radius: 50% !important;
+
+}
+
+
+
+.socials a img {
+
+    display: block;
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: contain;
+
+    opacity: .88;
+
+    transition: transform .25s ease, opacity .25s ease;
+
+}
+
+
+
+.socials a:hover img {
+
+    opacity: 1;
+
+    transform: scale(1.13);
+
+}
+
+
+
+.socials {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 14px;
+
+}
+
+
+
+.socials a {
+
+  width: 36px;
+
+  height: 36px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  transition: transform 0.25s ease;
+
+}
+
+
+
+.socials img {
+
+  width: 27px;
+
+  height: 27px;
+
+  object-fit: contain;
+
+  display: block;
+
+  filter: drop-shadow(0 0 4px rgba(220, 160, 255, 0.25));
+
+  transition: filter 0.25s ease, transform 0.25s ease;
+
+}
+
+
+
+.socials a:hover {
+
+  transform: translateY(-3px) scale(1.08);
+
+}
+
+
+
+.socials a:hover img {
+
+  filter:
+
+    drop-shadow(0 0 5px rgba(255, 160, 210, 0.8))
+
+    drop-shadow(0 0 9px rgba(130, 225, 255, 0.5));
+
+}
+
+/* ===== PRINCE TITLE: SMALLER ===== */
+.profile-title {
+    font-size: clamp(44px, 5vw, 58px) !important;
+    line-height: 1 !important;
+    margin-top: 12px !important;
+    margin-bottom: 4px !important;
+}
+
+/* Keep profile compact and centered */
+.profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+/* ===== MUSIC PLAYER: FIXED POSITION ===== */
+.music-player {
+    position: fixed !important;
+    left: 50% !important;
+    bottom: 76px !important;
+    top: auto !important;
+    right: auto !important;
+    transform: translateX(-50%) !important;
+
+    width: min(360px, calc(100vw - 32px)) !important;
+    min-height: 78px !important;
+    z-index: 20 !important;
+
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+
+    padding: 10px 12px !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
+}
+
+/* Track cover */
+.track-art {
+    width: 42px !important;
+    height: 42px !important;
+    flex: 0 0 42px !important;
+    overflow: hidden !important;
+    border-radius: 8px !important;
+}
+
+.track-art img {
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+}
+
+/* Track title and timeline */
+.track-info {
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+}
+
+.track-info h3 {
+    font-size: 12px !important;
+    margin: 0 0 3px !important;
+}
+
+.track-info p {
+    font-size: 10px !important;
+    margin: 0 !important;
+}
+
+.progress {
+    display: block !important;
+    width: 100% !important;
+    height: 4px !important;
+    margin: 7px 0 3px !important;
+    cursor: pointer;
+}
+
+.time {
+    display: flex !important;
+    justify-content: space-between !important;
+    font-size: 9px !important;
+}
+
+/* Player controls */
+.player-controls {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 5px !important;
+    flex: 0 0 auto !important;
+}
+
+.player-controls button {
+    cursor: pointer;
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+    .profile-title {
+        font-size: 44px !important;
+    }
+
+    .music-player {
+        bottom: 68px !important;
+        width: calc(100vw - 24px) !important;
+        gap: 8px !important;
+        padding: 8px !important;
+    }
+
+    .track-art {
+        width: 36px !important;
+        height: 36px !important;
+        flex-basis: 36px !important;
+    }
+}
+
+/* Social icons: add space below location text */
+.socials {
+    margin-top: 16px !important;
+    gap: 14px !important;
+}
+
+/* ===== CINEMATIC ROTATING SOCIAL ICONS ===== */
+
+.socials {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 17px !important;
+    margin-top: 20px !important;
+}
+
+/* Circular glass buttons */
+.socials a {
+    width: 48px !important;
+    height: 48px !important;
+    flex: 0 0 48px !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    border-radius: 50% !important;
+    overflow: hidden;
+    box-sizing: border-box;
+
+    background: rgba(16, 14, 24, 0.78) !important;
+    border: 1px solid rgba(220, 170, 225, 0.36) !important;
+
+    box-shadow:
+        inset 0 0 12px rgba(210, 140, 220, 0.05),
+        0 0 10px rgba(190, 110, 210, 0.06);
+
+    animation: socialSlowSpin 12s linear infinite;
+    transform-origin: center;
+
+    transition:
+        transform 0.35s ease,
+        background 0.35s ease,
+        border-color 0.35s ease,
+        box-shadow 0.35s ease;
+}
+
+/* Stagger the rotation for a more natural feel */
+.socials a:nth-child(2) {
+    animation-delay: -3s;
+}
+
+.socials a:nth-child(3) {
+    animation-delay: -6s;
+}
+
+.socials a:nth-child(4) {
+    animation-delay: -9s;
+}
+
+/* Actual logos */
+.socials a img {
+    width: 29px !important;
+    height: 29px !important;
+
+    display: block !important;
+    object-fit: contain !important;
+
+    opacity: 1 !important;
+    filter: none !important;
+
+    pointer-events: none;
+}
+
+/* Slow continuous rotation */
+@keyframes socialSlowSpin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Hover: stop rotation and lift the selected icon */
+.socials a:hover {
+    animation-play-state: paused !important;
+    transform: translateY(-7px) scale(1.08) !important;
+
+    background: rgba(100, 57, 105, 0.48) !important;
+    border-color: rgba(244, 184, 237, 0.9) !important;
+
+    box-shadow:
+        0 7px 22px rgba(0, 0, 0, 0.3),
+        0 0 18px rgba(226, 137, 216, 0.22);
+}
+
+/* Keep the hovered logo clear */
+.socials a:hover img {
+    opacity: 1 !important;
+}
+
+/* Mobile sizing */
+@media (max-width: 600px) {
+    .socials {
+        gap: 13px !important;
+    }
+
+    .socials a {
+        width: 44px !important;
+        height: 44px !important;
+        flex-basis: 44px !important;
+    }
+
+    .socials a img {
+        width: 26px !important;
+        height: 26px !important;
+    }
+}
+
+/* Respect reduced-motion accessibility setting */
+@media (prefers-reduced-motion: reduce) {
+    .socials a {
+        animation: none !important;
+    }
+}
+
+/* Social icons: crop logos into perfect circles */
+.socials a {
+    width: 48px !important;
+    height: 48px !important;
+    flex: 0 0 48px !important;
+    border-radius: 50% !important;
+    overflow: hidden !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.socials a img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    border-radius: 50% !important;
+    display: block !important;
+}
+
+/* Smooth social icon hover animation */
+.socials a {
+    transition:
+        transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+        background 0.35s ease,
+        border-color 0.35s ease,
+        box-shadow 0.4s ease !important;
+
+    will-change: transform;
+}
+
+/* Smooth floating lift */
+.socials a:hover {
+    transform: translate3d(0, -7px, 0) scale(1.06) !important;
+
+    box-shadow:
+        0 8px 18px rgba(0, 0, 0, 0.25),
+        0 0 16px rgba(226, 137, 216, 0.2);
+}
+
+/* Smooth return when cursor leaves */
+.socials a:not(:hover) {
+    transition:
+        transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+        background 0.35s ease,
+        border-color 0.35s ease,
+        box-shadow 0.4s ease !important;
+}
+
+/* Keep the icon itself stable */
+.socials a img {
+    pointer-events: none;
+}
+
+/* Smooth 60-FPS style social icon hover */
+.socials a {
+    position: relative;
+    transform: translate3d(0, 0, 0) scale(1);
+    transform-origin: center center;
+    will-change: transform, box-shadow, opacity;
+
+    transition:
+        transform 420ms cubic-bezier(0.16, 1, 0.3, 1),
+        box-shadow 420ms ease,
+        background-color 350ms ease,
+        border-color 350ms ease,
+        opacity 350ms ease !important;
+}
+
+/* Smooth lift when cursor enters */
+.socials a:hover {
+    transform: translate3d(0, -9px, 0) scale(1.08) !important;
+
+    box-shadow:
+        0 10px 22px rgba(0, 0, 0, 0.25),
+        0 0 20px rgba(230, 150, 220, 0.22);
+
+    background-color: rgba(190, 120, 200, 0.16);
+    border-color: rgba(245, 190, 240, 0.8);
+    z-index: 5;
+}
+
+/* Smooth logo appearance */
+.socials a img {
+    transition:
+        opacity 350ms ease,
+        filter 350ms ease !important;
+}
+
+/* Smooth return after cursor leaves */
+.socials a:not(:hover) {
+    transition:
+        transform 480ms cubic-bezier(0.22, 1, 0.36, 1),
+        box-shadow 420ms ease,
+        background-color 350ms ease,
+        border-color 350ms ease,
+        opacity 350ms ease !important;
+}
+
+/* Avoid hover effects on touch devices */
+@media (hover: none) {
+    .socials a:hover {
+        transform: none !important;
+    }
+}
+
+/* ===== FINAL SMOOTH SOCIAL ICON ANIMATION ===== */
+
+.socials a {
+    animation: none !important;
+    transform: none !important;
+    transition:
+        translate 500ms cubic-bezier(0.22, 1, 0.36, 1),
+        scale 500ms cubic-bezier(0.22, 1, 0.36, 1),
+        box-shadow 400ms ease,
+        border-color 400ms ease,
+        background-color 400ms ease !important;
+
+    translate: 0 0;
+    scale: 1;
+    will-change: translate, scale;
+    backface-visibility: hidden;
+}
+
+.socials a:hover {
+    translate: 0 -7px;
+    scale: 1.07;
+    box-shadow: 0 8px 22px rgba(220, 130, 220, 0.22);
+    border-color: rgba(245, 190, 240, 0.8);
+    z-index: 5;
+}
+
+/* Keep logo image steady */
+.socials a img {
+    transform: none !important;
+    transition: opacity 400ms ease !important;
+}
+
+/* Smoothly return to the original position */
+@media (prefers-reduced-motion: reduce) {
+    .socials a {
+        transition: none !important;
+    }
+}
+
+/* Social icons: smooth continuous rotation */
+.socials a {
+    animation: socialSpin 8s linear infinite !important;
+    transform-origin: center;
+    will-change: transform;
+    transition:
+        translate 450ms cubic-bezier(0.22, 1, 0.36, 1),
+        scale 450ms cubic-bezier(0.22, 1, 0.36, 1),
+        box-shadow 400ms ease,
+        border-color 400ms ease !important;
+}
+
+/* Hover par lift; rotation chalti rahegi */
+.socials a:hover {
+    translate: 0 -7px;
+    scale: 1.07;
+    box-shadow: 0 8px 22px rgba(220, 130, 220, 0.22);
+    border-color: rgba(245, 190, 240, 0.8);
+    z-index: 5;
+}
+
+/* Logo image khud nahi ghoomega */
+.socials a img {
+    transform: none !important;
+}
+
+@keyframes socialSpin {
+    from { rotate: 0deg; }
+    to   { rotate: 360deg; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .socials a {
+        animation: none !important;
+    }
+}
+
+
+/* Speaker icon only — no border or background */
+#video-sound-toggle {
+    position: fixed !important;
+    top: 28px !important;
+    left: 28px !important;
+    right: auto !important;
+    width: 24px !important;
+    height: 24px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+
+    display: grid !important;
+    place-items: center !important;
+
+    color: rgba(255, 255, 255, 0.85) !important;
+    background: transparent !important;
+    border: none !important;
+    border-radius: 0 !important;
+    outline: none !important;
+    box-shadow: none !important;
+
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    cursor: pointer;
+}
+
+#video-sound-toggle:hover,
+#video-sound-toggle:focus,
+#video-sound-toggle:active {
+    background: transparent !important;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+/* Remove unwanted white speaker button styling */
+#video-sound-toggle {
+    background: transparent !important;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    appearance: none !important;
+    -webkit-appearance: none !important;
+}
+
+#video-sound-toggle::-moz-focus-inner {
+    border: 0 !important;
+}
+
+#video-sound-toggle:focus,
+#video-sound-toggle:active,
+#video-sound-toggle:hover {
+    background: transparent !important;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+/* ===== CINEMATIC MOUSE GLOW + LIGHT TRAIL ===== */
+
+#sparkle-layer {
+    position: fixed;
+    inset: 0;
+    z-index: 9998;
+    pointer-events: none;
+    overflow: hidden;
+    --mouse-x: -200px;
+    --mouse-y: -200px;
+}
+
+#sparkle-layer.mouse-glow-active {
+    background: radial-gradient(
+        circle 145px at var(--mouse-x) var(--mouse-y),
+        rgba(210, 205, 255, 0.075),
+        rgba(160, 140, 255, 0.025) 45%,
+        transparent 75%
+    );
+}
+
+#sparkle-layer .mouse-spark {
+    position: absolute;
+    width: var(--spark-size, 3px);
+    height: var(--spark-size, 3px);
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow:
+        0 0 5px rgba(255, 255, 255, 0.75),
+        0 0 12px rgba(185, 165, 255, 0.45);
+    pointer-events: none;
+    animation: mouseSparkFade 650ms ease-out forwards;
+}
+
+@keyframes mouseSparkFade {
+    0% {
+        opacity: 0.95;
+        transform: translate(-50%, -50%) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(
+            calc(-50% + var(--drift-x, 0px)),
+            calc(-50% + var(--drift-y, -15px))
+        ) scale(0.1);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    #sparkle-layer .mouse-spark {
+        animation-duration: 250ms;
+    }
+}
+
+/* ===== FINAL SMOOTH MOUSE TRAIL OVERRIDE ===== */
+
+#sparkle-layer {
+    position: fixed !important;
+    inset: 0 !important;
+    z-index: 9998 !important;
+    pointer-events: none !important;
+    overflow: hidden !important;
+    --mouse-x: -200px;
+    --mouse-y: -200px;
+}
+
+#sparkle-layer.mouse-glow-active {
+    background: radial-gradient(
+        circle 130px at var(--mouse-x) var(--mouse-y),
+        rgba(210, 205, 255, 0.055),
+        rgba(160, 140, 255, 0.018) 48%,
+        transparent 75%
+    ) !important;
+}
+
+#sparkle-layer .mouse-spark {
+    position: absolute !important;
+    width: var(--spark-size, 3px) !important;
+    height: var(--spark-size, 3px) !important;
+    border-radius: 50% !important;
+    pointer-events: none !important;
+    background: rgba(235, 230, 255, 0.8) !important;
+    box-shadow:
+        0 0 5px rgba(220, 210, 255, 0.4),
+        0 0 12px rgba(175, 150, 255, 0.18) !important;
+    opacity: 0;
+    animation: smoothAirplaneTrail 1100ms ease-out forwards !important;
+}
+
+@keyframes smoothAirplaneTrail {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.5);
+        filter: blur(2px);
+    }
+    18% {
+        opacity: 0.65;
+        transform: translate(-50%, -50%) scale(1);
+        filter: blur(0.5px);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(
+            calc(-50% + var(--drift-x, 0px)),
+            calc(-50% + var(--drift-y, -12px))
+        ) scale(0.15);
+        filter: blur(4px);
+    }
+}
+
+/* ===== CINEMATIC PRINCE GLITCH ===== */
+
+.profile-title {
+    position: relative;
+    isolation: isolate;
+}
+
+.profile-title::before,
+.profile-title::after {
+    content: attr(data-text);
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    pointer-events: none;
+    opacity: 0;
+}
+
+.profile-title::before {
+    color: #ff3158;
+    z-index: -1;
+    animation: princeGlitchRed 5s infinite;
+}
+
+.profile-title::after {
+    color: #42eaff;
+    z-index: -2;
+    animation: princeGlitchCyan 5s infinite;
+}
+
+@keyframes princeGlitchRed {
+    0%, 91%, 94%, 100% {
+        opacity: 0;
+        transform: translateX(0);
+        clip-path: inset(0 0 0 0);
+    }
+    92% {
+        opacity: 0.8;
+        transform: translateX(-3px);
+        clip-path: inset(20% 0 60% 0);
+    }
+    93% {
+        opacity: 0.7;
+        transform: translateX(3px);
+        clip-path: inset(65% 0 10% 0);
+    }
+}
+
+@keyframes princeGlitchCyan {
+    0%, 91%, 94%, 100% {
+        opacity: 0;
+        transform: translateX(0);
+        clip-path: inset(0 0 0 0);
+    }
+    92% {
+        opacity: 0.8;
+        transform: translateX(3px);
+        clip-path: inset(55% 0 25% 0);
+    }
+    93% {
+        opacity: 0.7;
+        transform: translateX(-3px);
+        clip-path: inset(10% 0 70% 0);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .profile-title::before,
+    .profile-title::after {
+        animation: none;
+    }
+}
+
+.visitor-counter {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: inherit;
+  font-size: 12px;
+  opacity: 0.75;
+  white-space: nowrap;
+}
+
+.visitor-counter svg {
+  width: 15px;
+  height: 15px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.counter-divider {
+  opacity: 0.5;
+}
+
+/* Aesthetic visitor counter — bottom-right corner */
+.visitor-counter {
+  position: fixed !important;
+  right: 22px !important;
+  bottom: 18px !important;
+  left: auto !important;
+  top: auto !important;
+  z-index: 9999;
+  
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+
+  padding: 8px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 30px;
+  background: rgba(12, 12, 16, 0.65);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  color: rgba(235, 225, 238, 0.8);
+  font-family: "Georgia", serif;
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+  opacity: 0.85;
+}
+
+.visitor-counter svg {
+  width: 14px;
+  height: 14px;
+  fill: none;
+  stroke: #c6a8c9;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.counter-divider {
+  opacity: 0.45;
+}
+
+/* Literally-Me — subtle corner visitor counter */
+.visitor-counter {
+  position: fixed !important;
+  right: 22px !important;
+  bottom: 18px !important;
+  left: auto !important;
+  top: auto !important;
+  transform: none !important;
+
+  display: inline-flex !important;
+  align-items: center;
+  gap: 5px;
+
+  width: max-content;
+  padding: 0 !important;
+  margin: 0 !important;
+
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+
+  color: rgba(220, 202, 224, 0.65);
+  font-family: "Georgia", serif;
+  font-size: 10px;
+  font-style: italic;
+  letter-spacing: 0.6px;
+  white-space: nowrap;
+  opacity: 1;
+  z-index: 9999;
+  pointer-events: none;
+}
+
+.visitor-counter svg {
+  width: 12px;
+  height: 12px;
+  flex-shrink: 0;
+  fill: none;
+  stroke: #b99ac2;
+  stroke-width: 1.5;
+}
+
+.counter-divider {
+  opacity: 0.4;
+}
+
+/* Force visitor counter to bottom-right — no border */
+body #visitor-counter.visitor-counter {
+  position: fixed !important;
+  inset: auto 16px 14px auto !important;
+  transform: none !important;
+
+  display: flex !important;
+  width: max-content !important;
+  height: auto !important;
+  margin: 0 !important;
+  padding: 0 !important;
+
+  border: 0 !important;
+  outline: 0 !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border-radius: 0 !important;
+
+  color: rgba(220, 205, 225, 0.65) !important;
+  font: italic 10px Georgia, serif !important;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+  z-index: 99999 !important;
+  pointer-events: none;
+}
+
+body #visitor-counter.visitor-counter svg {
+  width: 12px !important;
+  height: 12px !important;
+  border: 0 !important;
+  filter: none !important;
+  stroke: #b99ac2 !important;
+}
+
+/* Visitor counter — clean bottom-right */
+#visitor-counter.visitor-counter {
+  position: fixed !important;
+  right: 20px !important;
+  bottom: 16px !important;
+  left: auto !important;
+  top: auto !important;
+  transform: none !important;
+
+  display: inline-flex !important;
+  align-items: center;
+  gap: 5px;
+
+  padding: 0 !important;
+  margin: 0 !important;
+  border: none !important;
+  outline: none !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+
+  color: rgba(230, 210, 235, 0.65) !important;
+  font: italic 10px Georgia, serif !important;
+  white-space: nowrap;
+  z-index: 99999 !important;
+}
+
+#visitor-counter.visitor-counter svg {
+  width: 12px !important;
+  height: 12px !important;
+  border: none !important;
+  fill: none !important;
+  stroke: #c9a5d5 !important;
+  stroke-width: 1.5;
+}
+#visitor-counter.visitor-counter {
+  position: fixed !important;
+  right: 18px !important;
+  bottom: 14px !important;
+  left: auto !important;
+  top: auto !important;
+  transform: none !important;
+
+  display: inline-flex !important;
+  align-items: center;
+  gap: 5px;
+
+  padding: 0 !important;
+  margin: 0 !important;
+  border: none !important;
+  outline: none !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+
+  color: rgba(230, 210, 235, 0.65) !important;
+  font: italic 10px Georgia, serif !important;
+  white-space: nowrap;
+  z-index: 99999 !important;
+  pointer-events: none;
+}
+
+#visitor-counter.visitor-counter svg {
+  width: 12px !important;
+  height: 12px !important;
+  fill: none !important;
+  stroke: #c9a5d5 !important;
+  stroke-width: 1.5;
+}
